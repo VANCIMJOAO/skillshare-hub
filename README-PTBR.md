@@ -8,7 +8,7 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/jvancim/skillshare-hub)
 ![GitHub top language](https://img.shields.io/github/languages/top/jvancim/skillshare-hub)
 
-**🚀 [Demo Online](https://skillshare-hub-wine.vercel.app) | 📚 [Documentação da API](https://skillsharehub-production.up.railway.app/api/docs) | 💼 [Portfólio](https://jvancim.dev)**
+**🚀 [Demo Online](https://skillshare-hub-wine.vercel.app) | 📚 [Documentação da API](https://skillsharehub-production.up.railway.app/api/docs) | 💼 [Portfólio](https://joaovictor.dev)**
 
 </div>
 
@@ -851,11 +851,11 @@ Este projeto foi desenvolvido como demonstração de competências técnicas em 
 - **LinkedIn**: [João Victor](https://linkedin.com/in/jvancim)
 - **GitHub**: [jvancim](https://github.com/jvancim)
 - **Email**: jvancim@gmail.com
-- **Portfolio**: [jvancim.dev](https://jvancim.dev)
+- **Portfolio**: [joaovictor.dev](https://joaovictor.dev)
 
 ### 🎯 Outros Projetos
 
-Confira outros projetos no meu [GitHub](https://github.com/jvancim) e [Portfolio](https://jvancim.dev).
+Confira outros projetos no meu [GitHub](https://github.com/jvancim) e [Portfolio](https://joaovictor.dev).
 
 ## 📄 Licença
 

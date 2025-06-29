@@ -833,3 +833,15 @@ git push origin main  # Auto-deploys via CI/CD
 **Deployment Status**: ✅ LIVE AND STABLE
 
 All features implemented, tested, and deployed successfully. The SkillShare Hub platform is ready for production use with comprehensive documentation and full test coverage.
+
+---
+
+## 👨‍💻 Author
+
+**João Victor**
+- **LinkedIn**: [João Victor](https://linkedin.com/in/jvancim)
+- **GitHub**: [jvancim](https://github.com/jvancim)
+- **Email**: jvancim@gmail.com
+- **Portfolio**: [joaovictor.dev](https://joaovictor.dev)
+
+Check out my other projects on [GitHub](https://github.com/jvancim) and [Portfolio](https://joaovictor.dev).
