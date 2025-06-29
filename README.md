@@ -839,9 +839,10 @@ All features implemented, tested, and deployed successfully. The SkillShare Hub 
 ## 👨‍💻 Author
 
 **João Victor**
+
 - **LinkedIn**: [João Victor](https://linkedin.com/in/jvancim)
-- **GitHub**: [jvancim](https://github.com/jvancim)
+- **GitHub**: [VANCIMJOAO](https://github.com/VANCIMJOAO)
 - **Email**: jvancim@gmail.com
 - **Portfolio**: [joaovictor.dev](https://joaovictor.dev)
 
-Check out my other projects on [GitHub](https://github.com/jvancim) and [Portfolio](https://joaovictor.dev).
+Check out my other projects on [GitHub](https://github.com/VANCIMJOAO) and [Portfolio](https://joaovictor.dev).

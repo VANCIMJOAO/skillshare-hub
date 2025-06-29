@@ -2,11 +2,11 @@
 
 <div align="center">
 
-![GitHub](https://img.shields.io/github/license/jvancim/skillshare-hub)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/jvancim/skillshare-hub/ci-cd.yml)
-![GitHub package.json version](https://img.shields.io/github/package-json/v/jvancim/skillshare-hub)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/jvancim/skillshare-hub)
-![GitHub top language](https://img.shields.io/github/languages/top/jvancim/skillshare-hub)
+![GitHub](https://img.shields.io/github/license/VANCIMJOAO/skillshare-hub)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/VANCIMJOAO/skillshare-hub/ci-cd.yml)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/VANCIMJOAO/skillshare-hub)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/VANCIMJOAO/skillshare-hub)
+![GitHub top language](https://img.shields.io/github/languages/top/VANCIMJOAO/skillshare-hub)
 
 **🚀 [Demo Online](https://skillshare-hub-wine.vercel.app) | 📚 [Documentação da API](https://skillsharehub-production.up.railway.app/api/docs) | 💼 [Portfólio](https://joaovictor.dev)**
 
@@ -849,13 +849,13 @@ Este projeto foi desenvolvido como demonstração de competências técnicas em 
 ### 📞 Contato
 
 - **LinkedIn**: [João Victor](https://linkedin.com/in/jvancim)
-- **GitHub**: [jvancim](https://github.com/jvancim)
+- **GitHub**: [VANCIMJOAO](https://github.com/VANCIMJOAO)
 - **Email**: jvancim@gmail.com
 - **Portfolio**: [joaovictor.dev](https://joaovictor.dev)
 
 ### 🎯 Outros Projetos
 
-Confira outros projetos no meu [GitHub](https://github.com/jvancim) e [Portfolio](https://joaovictor.dev).
+Confira outros projetos no meu [GitHub](https://github.com/VANCIMJOAO) e [Portfolio](https://joaovictor.dev).
 
 ## 📄 Licença
 
@@ -877,7 +877,7 @@ Este projeto está disponível como código aberto para fins educacionais e de d
 
 ```bash
 # 1. Clonar o repositório
-git clone https://github.com/jvancim/skillshare-hub
+git clone https://github.com/VANCIMJOAO/skillshare-hub
 cd skillshare-hub
 
 # 2. Instalar dependências
