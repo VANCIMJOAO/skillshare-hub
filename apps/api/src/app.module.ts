@@ -16,6 +16,7 @@ import { ChatModule } from './chat/chat.module';
 import { CacheAppModule } from './cache/cache.module';
 import { PaymentsModule } from './payments/payments.module';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { AppController } from './app.controller';
 import { User } from './users/entities/user.entity';
 import { Workshop } from './workshops/entities/workshop.entity';
 import { Enrollment } from './workshops/entities/enrollment.entity';
@@ -75,5 +76,6 @@ import { Payment } from './payments/entities/payment.entity';
             }
         ]),
     ],
+    controllers: [AppController],
 })
 export class AppModule { }
