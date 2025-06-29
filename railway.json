@@ -1,0 +1,8 @@
+{
+  "build": {
+    "buildCommand": "cd apps/api && npm run build"
+  },
+  "deploy": {
+    "startCommand": "cd apps/api && npm run start:prod"
+  }
+}

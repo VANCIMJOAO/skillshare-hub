@@ -1,0 +1,54 @@
+{
+    "name": "skillshare-hub",
+    "version": "1.0.0",
+    "description": "Uma plataforma completa de gerenciamento de workshops e cursos - Projeto de Portfólio",
+    "private": false,
+    "license": "MIT",
+    "author": {
+        "name": "João Victor",
+        "email": "jvancim@gmail.com",
+        "url": "https://jvancim.dev"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jvancim/skillshare-hub"
+    },
+    "homepage": "https://skillshare-hub-wine.vercel.app",
+    "keywords": [
+        "nextjs",
+        "nestjs",
+        "typescript",
+        "postgresql",
+        "redis",
+        "socket.io",
+        "stripe",
+        "tailwindcss",
+        "prisma",
+        "jest",
+        "portfolio",
+        "fullstack",
+        "monorepo"
+    ],
+    "engines": {
+        "node": ">=18.0.0",
+        "pnpm": ">=8.0.0"
+    },
+    "scripts": {
+        "dev": "concurrently \"pnpm dev:api\" \"pnpm dev:web\"",
+        "dev:api": "pnpm --filter api dev",
+        "dev:web": "pnpm --filter web dev",
+        "build": "pnpm --filter api build && pnpm --filter web build",
+        "lint": "pnpm --filter \"./apps/*\" lint",
+        "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+        "test": "pnpm --filter api test && pnpm --filter web test"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2",
+        "jest": "^30.0.3",
+        "prettier": "^3.0.3",
+        "typescript": "^5.2.2"
+    },
+    "dependencies": {
+        "node-fetch": "^2.7.0"
+    }
+}
