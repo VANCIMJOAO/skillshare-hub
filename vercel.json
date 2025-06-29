@@ -2,10 +2,10 @@
   "name": "skillshare-hub",
   "version": 2,
   "framework": "nextjs",
-  "buildCommand": "cd apps/web && pnpm build",
-  "devCommand": "cd apps/web && pnpm dev",
+  "buildCommand": "pnpm build",
+  "devCommand": "pnpm dev",
   "installCommand": "pnpm install",
-  "outputDirectory": "apps/web/.next",
+  "outputDirectory": ".next",
   "rootDirectory": "apps/web",
   "env": {
     "NEXT_PUBLIC_API_URL": "https://skillsharehub-production.up.railway.app",
@@ -13,7 +13,7 @@
     "NEXTAUTH_URL": "https://skillshare-hub-wine.vercel.app"
   },
   "functions": {
-    "apps/web/app/**/*": {
+    "app/**/*": {
       "maxDuration": 30
     }
   },

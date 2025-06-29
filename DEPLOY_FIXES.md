@@ -3,20 +3,24 @@
 ## Problemas Identificados
 
 ### 1. Frontend Vercel - Status 404
+
 **Problema:** O frontend estava retornando erro 404 (DEPLOYMENT_NOT_FOUND)
 **Causa:** Configuração incorreta do vercel.json para monorepo
 
 ### 2. API Railway - Rotas não encontradas
+
 **Problema:** Rota raiz `/` e `/ping` retornando 404
 **Causa:** AppController criado mas não incluído no AppModule
 
 ### 3. Error Handling Limitado
+
 **Problema:** Páginas de erro genéricas e tratamento básico de erros
 **Causa:** Falta de páginas customizadas e melhor tratamento na API client
 
 ## Soluções Aplicadas
 
 ### ✅ 1. Correção do AppModule
+
 ```typescript
 // apps/api/src/app.module.ts
 import { AppController } from './app.controller';
@@ -28,6 +32,7 @@ import { AppController } from './app.controller';
 ```
 
 ### ✅ 2. Melhoria do vercel.json
+
 ```json
 {
   "rewrites": [
@@ -40,10 +45,12 @@ import { AppController } from './app.controller';
 ```
 
 ### ✅ 3. Páginas de Erro Personalizadas
+
 - **apps/web/app/error.tsx**: Página de erro com botão "Tentar novamente"
 - **apps/web/app/not-found.tsx**: Página 404 personalizada
 
 ### ✅ 4. Melhoria da API Client
+
 ```typescript
 // apps/web/lib/api.ts
 - Adicionado timeout de 10 segundos
@@ -53,6 +60,7 @@ import { AppController } from './app.controller';
 ```
 
 ### ✅ 5. AppController Funcional
+
 ```typescript
 // apps/api/src/app.controller.ts
 @Controller()
@@ -60,7 +68,7 @@ export class AppController {
   @Get()
   @Redirect('/api/docs', 302)
   redirectToApiDocs() // Redireciona / para /api/docs
-  
+
   @Get('ping')
   ping() // Endpoint de teste
 }
@@ -69,11 +77,13 @@ export class AppController {
 ## Status Atual dos Deploys
 
 ### API Railway
+
 - ✅ Health check funcionando: `/health`
 - ⏳ Aguardando redeploy para AppController
 - 🔗 URL: https://skillsharehub-production.up.railway.app
 
 ### Frontend Vercel
+
 - ⏳ Aguardando redeploy com nova configuração
 - 🔗 URL: https://skillshare-hub-wine.vercel.app
 
@@ -105,10 +115,12 @@ curl -I https://skillshare-hub-wine.vercel.app
 ```
 
 ## Informações de Contato
+
 - **Desenvolvedor:** João Victor
 - **Email:** jvancim@gmail.com
 - **GitHub:** https://github.com/VANCIMJOAO
 - **Repositório:** https://github.com/VANCIMJOAO/skillshare-hub
 
 ---
-*Última atualização: 29/06/2025 17:30*
+
+_Última atualização: 29/06/2025 17:30_
