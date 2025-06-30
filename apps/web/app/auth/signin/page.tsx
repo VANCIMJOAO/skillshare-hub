@@ -49,15 +49,8 @@ export default function SignInPage() {
                 return;
             }
 
-            const session = await getSession();
-
-            if (session?.user.role === 'INSTRUCTOR') {
-                router.push('/dashboard');
-            } else if (session?.user.role === 'ADMIN') {
-                router.push('/admin');
-            } else {
-                router.push('/');
-            }
+            // Sempre redireciona para dashboard após login bem-sucedido
+            router.push('/dashboard');
         } catch (err) {
             setError('Erro ao fazer login');
         } finally {
