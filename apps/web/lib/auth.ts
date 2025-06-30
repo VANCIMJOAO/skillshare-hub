@@ -35,16 +35,20 @@ export const authOptions: NextAuthOptions = {
             if (user) {
                 token.email = user.email;
                 token.name = user.name;
-                token.role = user.role;
+                token.role = (user as any).role || 'user';
+                token.accessToken = (user as any).accessToken;
+                token.refreshToken = (user as any).refreshToken;
             }
             return token;
         },
         async session({ session, token }) {
             if (token) {
-                session.user.id = token.sub!;
-                session.user.email = token.email as string;
-                session.user.name = token.name as string;
-                session.user.role = token.role as string;
+                session.user.id = token.sub || '1';
+                session.user.email = token.email || '';
+                session.user.name = token.name || '';
+                session.user.role = token.role || 'user';
+                session.accessToken = token.accessToken;
+                session.refreshToken = token.refreshToken;
             }
             return session;
         },
