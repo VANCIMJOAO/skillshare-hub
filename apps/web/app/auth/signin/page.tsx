@@ -55,7 +55,7 @@ export default function SignInPage() {
             localStorage.setItem('demo-user', JSON.stringify(userData));
             
             // Redireciona para dashboard
-            router.push('/dashboard');
+            router.push('/dashboard-noauth');
         } catch (err) {
             setError('Erro ao fazer login');
         } finally {
