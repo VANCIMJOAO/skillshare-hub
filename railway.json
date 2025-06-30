@@ -1,8 +1,12 @@
 {
   "build": {
-    "buildCommand": "cd apps/api && npm run build"
+    "buildCommand": "cd apps/api && npm ci && npm run build"
   },
   "deploy": {
-    "startCommand": "cd apps/api && npm run start:prod"
+    "startCommand": "cd apps/api && npm run start:prod",
+    "restartPolicyType": "always"
+  },
+  "env": {
+    "NODE_ENV": "production"
   }
 }
