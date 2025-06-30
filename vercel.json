@@ -9,8 +9,8 @@
   "rootDirectory": "apps/web",
   "env": {
     "NEXT_PUBLIC_API_URL": "https://skillsharehub-production.up.railway.app",
-    "NEXTAUTH_SECRET": "your-nextauth-secret-here",
-    "NEXTAUTH_URL": "https://skillshare-hub-wine.vercel.app"
+    "NEXTAUTH_SECRET": "skillshare-hub-nextauth-secret-2024",
+    "NEXTAUTH_URL": "https://skillsharehub-jvancim-gmailcoms-projects.vercel.app"
   },
   "functions": {
     "app/**/*": {
