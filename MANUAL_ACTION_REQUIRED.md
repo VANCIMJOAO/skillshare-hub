@@ -97,6 +97,37 @@ Ajustar build command no Vercel para:
 2. Testar se login funciona com backend ativo
 3. Aplicar quick fix no frontend se necessário
 
+## 🚨 **PROBLEMA DE LOGIN - SERVER ERROR IDENTIFICADO**
+
+### ❌ **ISSUE ATUAL:**
+- Usuário tenta fazer login → aparece "Server error"
+- NextAuth retorna HTTP 500 na rota `/api/auth/session`
+- Login não funciona devido a configuração complexa dos callbacks
+
+### 🔧 **CORREÇÕES APLICADAS:**
+1. **Simplificada configuração NextAuth** (auth-simple.ts)
+2. **Removidos callbacks complexos** que causavam erro de tipos
+3. **Configuração modo demo** mantida para funcionar sem backend
+4. **Error handling** adicionado em todas as funções
+
+### 📝 **COMMITS REALIZADOS:**
+- `8434834`: Configuração simplificada NextAuth
+- `45a9ed9`: Correções de type handling nos callbacks
+
+### ⏳ **PRÓXIMOS PASSOS:**
+1. **Aguardar deploy Vercel** (2-3 minutos)
+2. **Testar login** no site em produção  
+3. **Verificar se "Server error" desapareceu**
+4. **Confirmar redirecionamento para /dashboard**
+
+### 🎯 **RESULTADO ESPERADO:**
+- ✅ Login deve funcionar com qualquer email/senha
+- ✅ Deve redirecionar para /dashboard após login
+- ✅ Não deve mais mostrar "Server error"
+- ✅ Página /dashboard deve carregar normalmente
+
+---
+
 ## ⚠️ **DIAGNÓSTICO ATUALIZADO: FRONTEND FUNCIONA MAS COM ERRO NEXTAUTH**
 
 ### ✅ **FRONTEND FUNCIONANDO:**
