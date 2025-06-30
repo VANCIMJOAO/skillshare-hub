@@ -94,6 +94,16 @@ export default function LandingHero() {
                                     Explorar Workshops
                                     <ArrowRight className="ml-2 h-4 w-4" />
                                 </Button>
+                                <Link href="/auth/signin-demo">
+                                    <Button
+                                        variant="outline"
+                                        size="lg"
+                                        className="w-full sm:w-auto border-2 border-green-500 text-green-600 hover:bg-green-50"
+                                    >
+                                        <CheckCircle className="mr-2 h-4 w-4" />
+                                        Login Demo
+                                    </Button>
+                                </Link>
                                 <Button
                                     variant="outline"
                                     size="lg"
