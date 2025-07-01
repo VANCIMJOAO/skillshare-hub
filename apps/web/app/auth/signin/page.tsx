@@ -43,16 +43,18 @@ export default function SignInPage() {
             const result = await signIn('credentials', {
                 email: data.email,
                 password: data.password,
-                redirect: true, // Deixar NextAuth fazer o redirecionamento
-                callbackUrl: '/dashboard',
+                redirect: false, // Não redirecionar automaticamente
             });
 
-            // Se redirect: true, este código não será executado se o login for bem-sucedido
             console.log('SignIn result:', result);
 
             if (result?.error) {
                 console.error('Login error:', result.error);
                 setError('Email ou senha incorretos');
+            } else if (result?.ok) {
+                console.log('Login successful, redirecting manually...');
+                // Redirecionamento manual para evitar problemas
+                window.location.replace('/dashboard');
             }
         } catch (err) {
             console.error('Login exception:', err);

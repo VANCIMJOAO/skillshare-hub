@@ -58,38 +58,25 @@ export const authOptions: NextAuthOptions = {
         async redirect({ url, baseUrl }) {
             console.log('Redirect callback:', { url, baseUrl });
             
-            // Se for um callback de sucesso, redirecionar para dashboard
-            if (url.includes('/api/auth/callback')) {
+            // Sempre redirecionar para dashboard após login bem-sucedido
+            if (url.includes('/api/auth/callback') || url.includes('/dashboard')) {
                 return `${baseUrl}/dashboard`;
             }
             
-            // Se for a página inicial ou root, redirecionar para dashboard
-            if (url === baseUrl || url === '/' || url === `${baseUrl}/`) {
-                return `${baseUrl}/dashboard`;
-            }
-            
-            // Para URLs que começam com baseUrl, usar elas
+            // Para qualquer outra URL, usar o baseUrl
             if (url.startsWith(baseUrl)) {
                 return url;
             }
             
-            // Para URLs relativas, adicionar baseUrl
-            if (url.startsWith('/')) {
-                return `${baseUrl}${url}`;
-            }
-            
-            // Fallback para dashboard
-            return `${baseUrl}/dashboard`;
+            // Fallback seguro
+            return baseUrl;
         },
         async signIn({ user, account, profile }) {
             console.log('SignIn callback:', { user, account });
             return true; // Sempre permitir sign in para demo
         },
     },
-    pages: {
-        signIn: '/auth/signin',
-        // Não definir página de erro - deixar NextAuth usar o padrão
-    },
+    // Remover completamente configuração de páginas personalizadas
     session: {
         strategy: 'jwt',
         maxAge: 30 * 24 * 60 * 60, // 30 days
