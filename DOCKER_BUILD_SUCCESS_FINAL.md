@@ -6,7 +6,7 @@
 
 ```
 ✅ [13/18] RUN pnpm run build ✔ 5s
-✅ [14/18] Build completed successfully ✔ 1s  
+✅ [14/18] Build completed successfully ✔ 1s
 ✅ [15/18] RUN pnpm prune --prod ✔ 696ms
 ✅ [16/18] RUN addgroup --system ✔ 130ms
 ✅ [17/18] RUN adduser --system ✔ 127ms
@@ -18,6 +18,7 @@
 ### 🔧 Últimas Correções Aplicadas:
 
 #### **Railway.json Limpo**
+
 - Removido `startCommand` conflitante
 - Railway agora usa o CMD do Dockerfile
 - Configuração minimalista e funcional
@@ -38,6 +39,7 @@
 ```
 
 #### **Dockerfile CMD Verificado**
+
 ```dockerfile
 CMD ["pnpm", "run", "start:prod"]
 ```
@@ -45,7 +47,7 @@ CMD ["pnpm", "run", "start:prod"]
 ### 📊 Processo de Build Validado:
 
 1. **✅ ERR_INVALID_THIS**: Eliminado (network configs)
-2. **✅ Dependencies Install**: 27.4s success  
+2. **✅ Dependencies Install**: 27.4s success
 3. **✅ Nest Build**: 5s success (CLI disponível)
 4. **✅ Dist Generation**: 436k files created
 5. **✅ Production Prune**: 696ms optimization
@@ -72,7 +74,7 @@ CMD ["pnpm", "run", "start:prod"]
 **Build Phase**: ✅ **100% SUCCESSFUL**  
 **Railway Integration**: ✅ **OPTIMIZED**  
 **Docker Image**: ✅ **READY TO RUN**  
-**Start Command**: ✅ **CONFIGURED**  
+**Start Command**: ✅ **CONFIGURED**
 
 ### 🔗 Final Commands:
 
@@ -103,6 +105,6 @@ git push origin main
 
 ---
 
-*Docker build 100% funcional em: 1 de julho de 2025*  
-*Tempo total: 142.80 segundos*  
-*Status: ✅ MISSION ACCOMPLISHED*
+_Docker build 100% funcional em: 1 de julho de 2025_  
+_Tempo total: 142.80 segundos_  
+_Status: ✅ MISSION ACCOMPLISHED_
