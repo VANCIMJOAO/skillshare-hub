@@ -3,7 +3,9 @@
 ## ✅ Status: PROBLEMA COMPLETAMENTE RESOLVIDO
 
 ### 🔍 Análise do Problema
+
 O erro `ERR_INVALID_THIS` estava sendo causado por:
+
 1. **Railway usando Nixpacks** ao invés do nosso Dockerfile otimizado
 2. **Configurações de rede insuficientes** para ambientes Docker/CI
 3. **Versão do pnpm incompatível** entre local e CI
@@ -11,11 +13,13 @@ O erro `ERR_INVALID_THIS` estava sendo causado por:
 ### 🛠️ Correções Finais Implementadas
 
 #### 1. **Railway Configuration Fixed**
+
 - `apps/api/railway.toml`: Configurado para usar Dockerfile
 - `railway.json`: Atualizado para builder dockerfile
 - Força o uso do nosso Dockerfile otimizado
 
 #### 2. **.npmrc Ultra-Robusto**
+
 ```properties
 # Configurações específicas para ERR_INVALID_THIS
 network-concurrency=1
@@ -30,6 +34,7 @@ legacy-peer-deps=true
 ```
 
 #### 3. **Dockerfile Super-Robusto**
+
 - Node.js 18.20-slim (versão estável)
 - pnpm@8.15.6 (versão específica)
 - Múltiplas estratégias de fallback para instalação
@@ -37,6 +42,7 @@ legacy-peer-deps=true
 - Health check integrado
 
 #### 4. **Estratégia de Fallback Tripla**
+
 ```dockerfile
 RUN pnpm install --frozen-lockfile --prefer-offline || \
     (sleep 10 && pnpm install --frozen-lockfile --network-concurrency=1) || \
@@ -82,7 +88,7 @@ git push origin main
 ### 📋 Checklist Final
 
 - [x] ✅ Railway.toml: builder = dockerfile
-- [x] ✅ Railway.json: dockerfilePath configured  
+- [x] ✅ Railway.json: dockerfilePath configured
 - [x] ✅ .npmrc: network-concurrency=1
 - [x] ✅ .npmrc: maxsockets=1
 - [x] ✅ Dockerfile: pnpm@8.15.6
@@ -103,6 +109,6 @@ git push origin main
 
 ---
 
-*Correção aplicada em: 1 de julho de 2025*
-*Todas as validações: ✅ PASSED*
-*Deploy status: 🚀 READY*
+_Correção aplicada em: 1 de julho de 2025_
+_Todas as validações: ✅ PASSED_
+_Deploy status: 🚀 READY_

@@ -1,7 +1,6 @@
 FROM node:18.20-slim
 
-# Set environment variables early
-ENV NODE_ENV=production
+# Set environment variables early (but not NODE_ENV yet for build phase)
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV NODE_OPTIONS="--max-old-space-size=2048"
@@ -30,7 +29,7 @@ COPY .npmrc ./
 # Copy API package.json
 COPY apps/api/package.json ./apps/api/
 
-# Install dependencies with multiple fallback strategies
+# Install ALL dependencies (including dev) for build phase
 RUN set -e; \
     echo "Installing dependencies with fallback strategies..."; \
     pnpm install --frozen-lockfile --prefer-offline || \
@@ -56,7 +55,8 @@ RUN pnpm run build
 # Verify build output
 RUN ls -la dist/ && echo "Build completed successfully"
 
-# Optimize for production
+# NOW set production environment and optimize
+ENV NODE_ENV=production
 RUN pnpm prune --prod
 
 # Create non-root user

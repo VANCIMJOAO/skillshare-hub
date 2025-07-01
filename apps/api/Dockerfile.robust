@@ -35,11 +35,11 @@ RUN set -e; \
     echo "Installing dependencies with fallback strategies..."; \
     pnpm install --frozen-lockfile --prefer-offline || \
     (echo "First attempt failed, waiting 10s..." && sleep 10 && \
-     pnpm install --frozen-lockfile --network-concurrency=1) || \
+    pnpm install --frozen-lockfile --network-concurrency=1) || \
     (echo "Second attempt failed, waiting 15s..." && sleep 15 && \
-     pnpm install --frozen-lockfile --no-optional) || \
+    pnpm install --frozen-lockfile --no-optional) || \
     (echo "Third attempt failed, using force..." && \
-     pnpm install --force --no-optional)
+    pnpm install --force --no-optional)
 
 # Copy source code
 COPY apps/api/ ./apps/api/
@@ -70,7 +70,7 @@ EXPOSE 3000
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:3000/health || exit 1
+    CMD curl -f http://localhost:3000/health || exit 1
 
 # Start the application
 CMD ["pnpm", "run", "start:prod"]
