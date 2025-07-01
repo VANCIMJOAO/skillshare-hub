@@ -5,7 +5,7 @@ echo "🧪 TESTE COMPLETO DO SISTEMA EM PRODUÇÃO"
 echo "========================================"
 
 # URLs dos ambientes
-FRONTEND_URL="https://skillhub-k2iazwdwu-jvancim-gmailcoms-projects.vercel.app"
+FRONTEND_URL="https://skillhub-3ryvfyjbf-jvancim-gmailcoms-projects.vercel.app"
 BACKEND_URL="https://skillsharehub-production.up.railway.app"
 
 echo ""

@@ -29,6 +29,7 @@ async function bootstrap() {
             'http://localhost:3001',
             'https://skillsharehub-production.up.railway.app',
             'https://skillhub-k2iazwdwu-jvancim-gmailcoms-projects.vercel.app',
+            'https://skillhub-3ryvfyjbf-jvancim-gmailcoms-projects.vercel.app',
             /^https:\/\/skillhub-.*\.vercel\.app$/,
         ],
         credentials: true,
