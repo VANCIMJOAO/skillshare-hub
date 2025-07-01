@@ -2,6 +2,7 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
+import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -111,15 +112,21 @@ function ProfileContent() {
                             <div className="border-t pt-6">
                                 <h3 className="text-lg font-semibold mb-4">Recursos do Instrutor</h3>
                                 <div className="space-y-2">
-                                    <Button variant="outline" className="w-full justify-start">
-                                        Criar Novo Workshop
-                                    </Button>
-                                    <Button variant="outline" className="w-full justify-start">
-                                        Gerenciar Workshops
-                                    </Button>
-                                    <Button variant="outline" className="w-full justify-start">
-                                        Ver Inscrições
-                                    </Button>
+                                    <Link href="/workshops/create">
+                                        <Button variant="outline" className="w-full justify-start">
+                                            Criar Novo Workshop
+                                        </Button>
+                                    </Link>
+                                    <Link href="/dashboard/workshops">
+                                        <Button variant="outline" className="w-full justify-start">
+                                            Gerenciar Workshops
+                                        </Button>
+                                    </Link>
+                                    <Link href="/dashboard/enrollments">
+                                        <Button variant="outline" className="w-full justify-start">
+                                            Ver Inscrições
+                                        </Button>
+                                    </Link>
                                 </div>
                             </div>
                         )}
@@ -128,15 +135,21 @@ function ProfileContent() {
                             <div className="border-t pt-6">
                                 <h3 className="text-lg font-semibold mb-4">Painel Administrativo</h3>
                                 <div className="space-y-2">
-                                    <Button variant="outline" className="w-full justify-start">
-                                        Gerenciar Usuários
-                                    </Button>
-                                    <Button variant="outline" className="w-full justify-start">
-                                        Moderar Workshops
-                                    </Button>
-                                    <Button variant="outline" className="w-full justify-start">
-                                        Relatórios
-                                    </Button>
+                                    <Link href="/admin/users">
+                                        <Button variant="outline" className="w-full justify-start">
+                                            Gerenciar Usuários
+                                        </Button>
+                                    </Link>
+                                    <Link href="/admin/workshops">
+                                        <Button variant="outline" className="w-full justify-start">
+                                            Moderar Workshops
+                                        </Button>
+                                    </Link>
+                                    <Link href="/admin/reports">
+                                        <Button variant="outline" className="w-full justify-start">
+                                            Relatórios
+                                        </Button>
+                                    </Link>
                                 </div>
                             </div>
                         )}

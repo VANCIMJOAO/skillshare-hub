@@ -34,11 +34,19 @@ export default function SignInPage() {
     });
 
     const onSubmit = async (data: SignInFormData) => {
+        console.log('🚪 LOGIN FORM SUBMIT START:', {
+            email: data.email,
+            passwordLength: data.password.length,
+            timestamp: new Date().toISOString(),
+            url: window.location.href,
+            userAgent: navigator.userAgent
+        });
+
         setIsLoading(true);
         setError('');
 
         try {
-            console.log('Attempting login with:', data.email);
+            console.log('📡 CALLING signIn with credentials provider...');
             
             const result = await signIn('credentials', {
                 email: data.email,
@@ -46,21 +54,50 @@ export default function SignInPage() {
                 redirect: false, // Não redirecionar automaticamente
             });
 
-            console.log('SignIn result:', result);
+            console.log('📋 SIGNIN RESULT:', {
+                result,
+                ok: result?.ok,
+                error: result?.error,
+                status: result?.status,
+                url: result?.url,
+                timestamp: new Date().toISOString()
+            });
 
             if (result?.error) {
-                console.error('Login error:', result.error);
-                setError('Email ou senha incorretos');
+                console.error('❌ LOGIN ERROR DETECTED:', {
+                    error: result.error,
+                    status: result.status,
+                    url: result.url
+                });
+                setError(`Erro de login: ${result.error}`);
             } else if (result?.ok) {
-                console.log('Login successful, redirecting manually...');
-                // Redirecionamento manual para evitar problemas
+                console.log('✅ LOGIN SUCCESS - Getting session...');
+                
+                // Verificar sessão após login
+                const session = await getSession();
+                console.log('📊 SESSION AFTER LOGIN:', {
+                    session,
+                    hasUser: !!session?.user,
+                    userEmail: session?.user?.email
+                });
+                
+                console.log('🔄 REDIRECTING TO DASHBOARD...');
                 window.location.replace('/dashboard');
+            } else {
+                console.log('⚠️ UNKNOWN LOGIN STATE:', result);
+                setError('Estado de login desconhecido. Verifique os logs.');
             }
         } catch (err) {
-            console.error('Login exception:', err);
-            setError('Erro ao fazer login. Tente novamente.');
+            console.error('💥 LOGIN EXCEPTION:', {
+                error: err,
+                message: err instanceof Error ? err.message : 'Unknown error',
+                stack: err instanceof Error ? err.stack : null,
+                timestamp: new Date().toISOString()
+            });
+            setError('Erro ao fazer login. Verifique os logs do console.');
         } finally {
             setIsLoading(false);
+            console.log('🏁 LOGIN PROCESS FINISHED');
         }
     };
 

@@ -1,14 +1,56 @@
 // apps/web/app/page.tsx
 import { Suspense } from 'react';
-import LandingHeroSimple from '../components/LandingHeroSimple';
+import LandingHero from '../components/LandingHero';
+import FeaturedWorkshops from '../components/FeaturedWorkshops';
+import WorkshopCategories from '../components/WorkshopCategories';
 
 export default function HomePage() {
     return (
         <div>
             {/* Hero Section */}
-            <LandingHeroSimple />
+            <LandingHero />
 
-            {/* Additional Content Section */}
+            {/* Featured Workshops Section */}
+            <section className="py-16 bg-white">
+                <div className="container mx-auto px-4">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                            Workshops em Destaque
+                        </h2>
+                        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                            Descubra os workshops mais populares da nossa plataforma
+                        </p>
+                    </div>
+                    
+                    <Suspense fallback={
+                        <div className="grid md:grid-cols-3 gap-6">
+                            {[1, 2, 3].map((i) => (
+                                <div key={i} className="bg-gray-200 animate-pulse rounded-lg h-64"></div>
+                            ))}
+                        </div>
+                    }>
+                        <FeaturedWorkshops />
+                    </Suspense>
+                </div>
+            </section>
+
+            {/* Categories Section */}
+            <section className="py-16 bg-gray-50">
+                <div className="container mx-auto px-4">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                            Explore por Categoria
+                        </h2>
+                        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                            Encontre workshops na área que mais te interessa
+                        </p>
+                    </div>
+                    
+                    <WorkshopCategories />
+                </div>
+            </section>
+
+            {/* How it Works Section */}
             <section className="py-16 bg-white">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-12">

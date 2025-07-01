@@ -18,9 +18,6 @@ const nextConfig = {
     images: {
         unoptimized: true,
     },
-
-    // Force all pages to be client-side only
-    trailingSlash: true,
     
     // Simple experimental config (remove appDir for Next 14)
     experimental: {
