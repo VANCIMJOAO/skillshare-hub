@@ -5,21 +5,24 @@
 ### 🔍 Problemas Identificados e Resolvidos
 
 #### 1. **ERR_INVALID_THIS** ✅ RESOLVIDO
+
 - **Causa**: Railway usando Nixpacks + configurações de rede inadequadas
 - **Solução**: Railway forçado para Dockerfile + .npmrc ultra-robusto
 
-#### 2. **Nest CLI "not found"** ✅ RESOLVIDO  
+#### 2. **Nest CLI "not found"** ✅ RESOLVIDO
+
 - **Causa**: NODE_ENV=production definido antes do build, pulando devDependencies
 - **Solução**: NODE_ENV definido APÓS o build, permitindo acesso ao @nestjs/cli
 
 ### 🛠️ Correções Técnicas Implementadas
 
 #### **Dockerfile Otimizado (Ordem Correta)**
+
 ```dockerfile
 # 1. Install ALL dependencies (including dev)
 pnpm install --frozen-lockfile
 
-# 2. Copy source code  
+# 2. Copy source code
 COPY apps/api/ ./apps/api/
 
 # 3. Build with nest CLI available
@@ -31,6 +34,7 @@ RUN pnpm prune --prod
 ```
 
 #### **Railway Configuration Fixed**
+
 ```toml
 [build]
 builder = "dockerfile"
@@ -38,6 +42,7 @@ dockerfilePath = "apps/api/Dockerfile"
 ```
 
 #### **.npmrc Ultra-Robusto**
+
 ```properties
 network-concurrency=1
 maxsockets=1
@@ -49,7 +54,7 @@ legacy-peer-deps=true
 
 ```bash
 ✅ ERR_INVALID_THIS fix: VALIDATED
-✅ API build process: SUCCESSFUL  
+✅ API build process: SUCCESSFUL
 ✅ Dist output: 2.3M generated
 ✅ Dockerfile order: CORRECT (build:53, env:59)
 ✅ Full monorepo build: SUCCESSFUL
@@ -61,7 +66,7 @@ legacy-peer-deps=true
 ### 🎯 Resultados Alcançados
 
 1. **ERR_INVALID_THIS**: ❌ **ELIMINADO COMPLETAMENTE**
-2. **Nest CLI Error**: ❌ **ELIMINADO COMPLETAMENTE**  
+2. **Nest CLI Error**: ❌ **ELIMINADO COMPLETAMENTE**
 3. **Build Success**: ✅ **100% FUNCIONAL**
 4. **Docker Optimization**: ✅ **COMPLETA**
 5. **Railway Deploy**: ✅ **PRONTO**
@@ -69,6 +74,7 @@ legacy-peer-deps=true
 ### 🚀 Processo de Build Otimizado
 
 #### Antes (Problemas):
+
 ```
 ❌ ERR_INVALID_THIS (Railway Nixpacks)
 ❌ sh: nest: not found (NODE_ENV early)
@@ -77,10 +83,11 @@ legacy-peer-deps=true
 ```
 
 #### Depois (Funcionando):
+
 ```
 ✅ pnpm install (todas deps) → 27.4s
 ✅ nest build (CLI disponível) → Success
-✅ NODE_ENV=production (após build) → Success  
+✅ NODE_ENV=production (após build) → Success
 ✅ pnpm prune --prod → Otimizado
 ✅ Deploy ready → 100%
 ```
@@ -105,7 +112,7 @@ legacy-peer-deps=true
 # Build Docker completo agora funciona:
 docker build -t skillhub-api -f apps/api/Dockerfile .
 
-# Deploy automático:  
+# Deploy automático:
 git push origin main
 # ↳ Railway usará Dockerfile otimizado
 # ↳ Sem ERR_INVALID_THIS
@@ -122,12 +129,12 @@ git push origin main
 **ERR_INVALID_THIS**: ❌ ELIMINADO  
 **Nest CLI Error**: ❌ ELIMINADO  
 **Build Docker**: ✅ 100% FUNCIONAL  
-**Deploy Ready**: 🚀 COMPLETO  
+**Deploy Ready**: 🚀 COMPLETO
 
 **Confiança**: 🎯 **100% - PROBLEMAS DEFINITIVAMENTE RESOLVIDOS**
 
 ---
 
-*Correção dupla concluída em: 1 de julho de 2025*  
-*Validações: ✅ TODAS PASSED*  
-*Deploy status: 🚀 READY TO GO*
+_Correção dupla concluída em: 1 de julho de 2025_  
+_Validações: ✅ TODAS PASSED_  
+_Deploy status: 🚀 READY TO GO_
