@@ -7,7 +7,20 @@ export default withAuth(
     },
     {
         callbacks: {
-            authorized: ({ token }) => !!token,
+            authorized: ({ token, req }) => {
+                // Permitir acesso às rotas de autenticação
+                if (req.nextUrl.pathname.startsWith('/auth/')) {
+                    return true;
+                }
+                
+                // Permitir acesso às rotas da API do NextAuth
+                if (req.nextUrl.pathname.startsWith('/api/auth/')) {
+                    return true;
+                }
+                
+                // Para outras rotas, exigir token
+                return !!token;
+            },
         },
     }
 );
@@ -21,5 +34,7 @@ export const config = {
         '/student/:path*',
         '/workshops/create',
         '/workshops/:path*/edit',
+        '/auth/:path*',
+        '/api/auth/:path*',
     ],
 };
