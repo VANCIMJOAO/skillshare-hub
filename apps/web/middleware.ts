@@ -4,10 +4,22 @@ import { withAuth } from 'next-auth/middleware';
 export default withAuth(
     function middleware(req) {
         // Middleware adicional pode ser adicionado aqui se necessário
+        console.log('Middleware executado para:', req.nextUrl.pathname);
     },
     {
         callbacks: {
-            authorized: ({ token }) => !!token,
+            authorized: ({ token, req }) => {
+                const { pathname } = req.nextUrl;
+                console.log('Verificando autorização para:', pathname, 'Token:', !!token);
+                
+                // Sempre permitir acesso às rotas de autenticação
+                if (pathname.startsWith('/auth/') || pathname.startsWith('/api/auth/')) {
+                    return true;
+                }
+                
+                // Para rotas protegidas, exigir token
+                return !!token;
+            },
         },
     }
 );
@@ -21,5 +33,9 @@ export const config = {
         '/student/:path*',
         '/workshops/create',
         '/workshops/:path*/edit',
+        // Adicionando rotas de auth para poder aplicar lógica personalizada
+        '/auth/signin',
+        '/auth/register',
+        '/api/auth/:path*',
     ],
 };
