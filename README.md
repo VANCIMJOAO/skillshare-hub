@@ -18,6 +18,7 @@ skillshare-hub/
 ## 🚀 Tecnologias
 
 ### Frontend (Next.js 14)
+
 - **Framework**: Next.js 14 com App Router
 - **Styling**: Tailwind CSS + Shadcn/ui
 - **Autenticação**: NextAuth.js
@@ -25,6 +26,7 @@ skillshare-hub/
 - **Estado**: React Query
 
 ### Backend (NestJS)
+
 - **Framework**: NestJS
 - **Banco de Dados**: PostgreSQL + Prisma
 - **Autenticação**: JWT + Passport
@@ -33,11 +35,13 @@ skillshare-hub/
 ## 🏃‍♂️ Como Executar
 
 ### Pré-requisitos
+
 - Node.js 18+
 - pnpm
 - PostgreSQL
 
 ### Instalação
+
 ```bash
 # Instalar dependências
 pnpm install

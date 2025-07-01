@@ -1,31 +1,39 @@
 FROM node:18-slim
 
-# Install Python and build tools (needed for some native dependencies)
+# Install Python, build tools and pnpm
 RUN apt-get update && apt-get install -y \
     python3 \
     make \
     g++ \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && npm install -g pnpm@8
 
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
+# Copy root package files and workspace config
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+COPY .npmrc ./
 
-# Install all dependencies first (needed for build)
-RUN npm install --legacy-peer-deps
+# Copy app package files
+COPY apps/api/package.json ./apps/api/
+
+# Install dependencies with network error handling
+RUN pnpm install --frozen-lockfile --prefer-offline || \
+    (sleep 5 && pnpm install --frozen-lockfile --prefer-offline) || \
+    (sleep 10 && pnpm install --frozen-lockfile)
 
 # Copy source code
-COPY . .
+COPY apps/api/ ./apps/api/
 
 # Build the application
-RUN npm run build
+WORKDIR /app/apps/api
+RUN pnpm run build
 
 # List dist directory for debugging
-RUN ls -la dist/
+RUN ls -la dist/ || echo "No dist directory found"
 
 # Remove dev dependencies
-RUN npm prune --production
+RUN pnpm prune --prod
 
 # Expose port
 EXPOSE 3000
@@ -34,4 +42,4 @@ EXPOSE 3000
 ENV NODE_ENV=production
 
 # Start the application
-CMD ["npm", "run", "start:prod"]
+CMD ["pnpm", "run", "start:prod"]
