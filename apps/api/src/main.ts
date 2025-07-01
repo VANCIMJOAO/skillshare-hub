@@ -26,16 +26,39 @@ async function bootstrap() {
         'http://localhost:3000',
         'http://localhost:3001',
         'https://skillsharehub-production.up.railway.app',
+        'https://skillhub-ay0e814bp-jvancim-gmailcoms-projects.vercel.app',
         process.env.FRONTEND_URL,
         // Allow all Vercel preview deployments
-        /^https:\/\/skillsharehub-.*\.vercel\.app$/,
+        /^https:\/\/skillhub-.*\.vercel\.app$/,
     ].filter(Boolean);
 
     app.enableCors({
-        origin: allowedOrigins,
+        origin: function (origin, callback) {
+            // Allow requests with no origin (like mobile apps or curl requests)
+            if (!origin) return callback(null, true);
+            
+            // Check if origin is in allowed list
+            const isAllowed = allowedOrigins.some(allowedOrigin => {
+                if (typeof allowedOrigin === 'string') {
+                    return allowedOrigin === origin;
+                } else if (allowedOrigin instanceof RegExp) {
+                    return allowedOrigin.test(origin);
+                }
+                return false;
+            });
+            
+            if (isAllowed) {
+                callback(null, true);
+            } else {
+                console.log(`CORS blocked origin: ${origin}`);
+                callback(new Error('Not allowed by CORS'));
+            }
+        },
         credentials: true,
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],
+        exposedHeaders: ['Content-Range', 'X-Content-Range'],
+        optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204
     });
 
     // Serve static files
