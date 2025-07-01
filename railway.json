@@ -1,9 +1,10 @@
 {
   "build": {
-    "buildCommand": "cd apps/api && npm ci && npm run build"
+    "builder": "dockerfile",
+    "dockerfilePath": "apps/api/Dockerfile"
   },
   "deploy": {
-    "startCommand": "cd apps/api && npm run start:prod",
+    "startCommand": "cd apps/api && pnpm run start:prod",
     "restartPolicyType": "always"
   },
   "env": {

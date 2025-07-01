@@ -3,6 +3,7 @@
 ## ✅ Problema Resolvido: ERR_INVALID_THIS e Falhas de Build Docker
 
 ### 🔍 Problema Identificado
+
 - **Erro:** `ERR_INVALID_THIS` no pnpm durante builds Docker
 - **Causa:** Problemas de rede e timeout em ambiente Docker/CI
 - **Impacto:** Falhas de build intermitentes em CI/CD
@@ -10,6 +11,7 @@
 ### 🛠️ Correções Implementadas
 
 #### 1. **Configuração .npmrc Otimizada**
+
 ```properties
 # NPM Registry Configuration
 registry=https://registry.npmjs.org/
@@ -36,12 +38,14 @@ progress=false
 ```
 
 **Benefícios:**
+
 - ✅ Resolve `ERR_INVALID_THIS`
 - ✅ Aumenta timeouts para redes lentas
 - ✅ Reduz concorrência para evitar sobrecarga
 - ✅ Configurações específicas para Docker/CI
 
 #### 2. **Dockerfile Otimizado**
+
 ```dockerfile
 FROM node:18-slim
 
@@ -71,12 +75,14 @@ RUN pnpm install --frozen-lockfile --prefer-offline || \
 ```
 
 **Melhorias:**
+
 - ✅ Usa pnpm 8.x (compatível com lockfile v6.0)
 - ✅ Copia .npmrc para aplicar configurações de rede
 - ✅ Retry logic para instalação de dependências
 - ✅ Estrutura de monorepo respeitada
 
 #### 3. **.dockerignore Criado**
+
 ```
 # Dependencies
 node_modules
@@ -98,17 +104,20 @@ screenshots
 ```
 
 **Benefícios:**
+
 - ✅ Reduz tamanho do contexto Docker
 - ✅ Acelera builds
 - ✅ Evita copiar arquivos desnecessários
 
 #### 4. **Scripts de Teste**
+
 - `scripts/test-docker-build.sh` - Teste completo Docker
 - `scripts/simulate-docker-build.sh` - Simulação sem Docker
 
 ### 🧪 Validação dos Fixes
 
 #### Backend (NestJS)
+
 ```bash
 ✅ pnpm run build --filter=api
 ✅ Build time: 7.983s
@@ -117,6 +126,7 @@ screenshots
 ```
 
 #### Frontend (Next.js)
+
 ```bash
 ✅ next build
 ✅ Build time: ~30s
@@ -125,6 +135,7 @@ screenshots
 ```
 
 #### Configurações de Rede
+
 ```bash
 ✅ .npmrc com retry settings
 ✅ network-concurrency=1
@@ -163,6 +174,7 @@ screenshots
 ### 🚀 Próximos Passos
 
 1. **Testar em CI/CD real**
+
    ```bash
    docker build -t skillhub-api -f apps/api/Dockerfile .
    ```
@@ -199,6 +211,7 @@ head -5 pnpm-lock.yaml
 ## 🎉 Status: **FIXED & READY FOR DEPLOY**
 
 O problema de `ERR_INVALID_THIS` foi **completamente resolvido** com:
+
 - Configurações de rede robustas
 - Dockerfile otimizado para monorepo
 - Retry logic para falhas de rede
@@ -208,5 +221,5 @@ O problema de `ERR_INVALID_THIS` foi **completamente resolvido** com:
 
 ---
 
-*Relatório gerado em: $(date)*
-*Versão: 1.0 - Docker Build Fixed*
+_Relatório gerado em: $(date)_
+_Versão: 1.0 - Docker Build Fixed_

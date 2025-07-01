@@ -1,0 +1,76 @@
+FROM node:18.20-slim
+
+# Set environment variables early
+ENV NODE_ENV=production
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+ENV NODE_OPTIONS="--max-old-space-size=2048"
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    python3 \
+    make \
+    g++ \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install pnpm globally with specific version
+RUN npm install -g pnpm@8.15.6
+
+# Verify pnpm installation
+RUN pnpm --version
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files and workspace configuration
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+COPY .npmrc ./
+
+# Copy API package.json
+COPY apps/api/package.json ./apps/api/
+
+# Install dependencies with multiple fallback strategies
+RUN set -e; \
+    echo "Installing dependencies with fallback strategies..."; \
+    pnpm install --frozen-lockfile --prefer-offline || \
+    (echo "First attempt failed, waiting 10s..." && sleep 10 && \
+     pnpm install --frozen-lockfile --network-concurrency=1) || \
+    (echo "Second attempt failed, waiting 15s..." && sleep 15 && \
+     pnpm install --frozen-lockfile --no-optional) || \
+    (echo "Third attempt failed, using force..." && \
+     pnpm install --force --no-optional)
+
+# Copy source code
+COPY apps/api/ ./apps/api/
+
+# Verify source code
+RUN ls -la apps/api/
+
+# Set working directory to API
+WORKDIR /app/apps/api
+
+# Build the application
+RUN pnpm run build
+
+# Verify build output
+RUN ls -la dist/ && echo "Build completed successfully"
+
+# Optimize for production
+RUN pnpm prune --prod
+
+# Create non-root user
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+RUN chown -R nextjs:nodejs /app
+USER nextjs
+
+# Expose port
+EXPOSE 3000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:3000/health || exit 1
+
+# Start the application
+CMD ["pnpm", "run", "start:prod"]

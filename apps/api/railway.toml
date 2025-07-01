@@ -1,8 +1,9 @@
 [build]
-builder = "nixpacks"
+builder = "dockerfile"
+dockerfilePath = "apps/api/Dockerfile"
 
 [deploy]
-startCommand = "npm run start:prod"
+startCommand = "pnpm run start:prod"
 restartPolicyType = "always"
 
 [env]
