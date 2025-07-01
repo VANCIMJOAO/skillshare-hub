@@ -38,24 +38,26 @@ export default function SignInPage() {
         setError('');
 
         try {
-            console.log('Attempting login with:', data.email);
-            
             const result = await signIn('credentials', {
                 email: data.email,
                 password: data.password,
-                redirect: true, // Deixar NextAuth fazer o redirecionamento
-                callbackUrl: '/dashboard',
+                redirect: false,
             });
 
-            // Se redirect: true, este código não será executado se o login for bem-sucedido
-            console.log('SignIn result:', result);
-
             if (result?.error) {
-                console.error('Login error:', result.error);
                 setError('Email ou senha incorretos');
+                return;
+            }
+
+            if (result?.ok) {
+                // Obter sessão atualizada
+                const session = await getSession();
+                if (session) {
+                    router.push('/dashboard');
+                }
             }
         } catch (err) {
-            console.error('Login exception:', err);
+            console.error('Login error:', err);
             setError('Erro ao fazer login. Tente novamente.');
         } finally {
             setIsLoading(false);

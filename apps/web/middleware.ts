@@ -33,9 +33,6 @@ export const config = {
         '/student/:path*',
         '/workshops/create',
         '/workshops/:path*/edit',
-        // Adicionando rotas de auth para poder aplicar lógica personalizada
-        '/auth/signin',
-        '/auth/register',
-        '/api/auth/:path*',
+        // Removendo rotas de auth do middleware para evitar interferência
     ],
 };

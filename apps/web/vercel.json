@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "env": {
+    "NEXTAUTH_URL": "https://skillhub-ajjuo1geg-jvancim-gmailcoms-projects.vercel.app",
+    "NEXTAUTH_SECRET": "68QSERd7on8RG9JHIZ4Wmmn3+I+MaoWb1CsPLF6uY0I=",
+    "NODE_ENV": "production"
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://skillsharehub-production.up.railway.app/api/$1"
+    }
+  ]
+}

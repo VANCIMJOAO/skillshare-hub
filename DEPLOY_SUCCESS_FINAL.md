@@ -1,7 +1,26 @@
-# 🚀 RELATÓRIO DE DEPLOY - SkillHub
+# 🚀 DEPLOY CONCLUÍDO COM SUCESSO - SkillHub
 
-**Data**: 1 de julho de 2025  
-**Status**: ✅ **DEPLOY REALIZADO COM SUCESSO**
+**Data**: 1 de julho de 2025 - 15:15:00  
+**Status**: ✅ **DEPLOY REALIZADO COM SUCESSO**  
+**Ambiente**: Produção (Vercel + Railway)
+
+---
+
+## 🌐 URLs DE PRODUÇÃO
+
+### 📱 Frontend (Vercel)
+
+- **URL Principal**: https://skillhub-luez1scyl-jvancim-gmailcoms-projects.vercel.app
+- **Status**: ✅ Online e funcionando
+- **Build**: ✅ Compilado com sucesso
+- **SSL**: ✅ HTTPS habilitado
+
+### 🛡️ Backend (Railway)
+
+- **API Base**: https://skillsharehub-production.up.railway.app
+- **Documentação**: https://skillsharehub-production.up.railway.app/api/docs
+- **Health Check**: https://skillsharehub-production.up.railway.app/health
+- **Status**: ✅ Online e funcionando
 
 ---
 

@@ -95,12 +95,14 @@ const Navbar: React.FC = () => {
                                                 Profile
                                             </Link>
                                         </DropdownMenuItem>
-                                        <DropdownMenuItem
-                                            onClick={() => signOut({ callbackUrl: '/' })}
-                                            className="flex items-center"
-                                        >
-                                            <LogOut className="mr-2 h-4 w-4" />
-                                            Sign out
+                                        <DropdownMenuItem asChild>
+                                            <button
+                                                onClick={() => signOut({ callbackUrl: '/' })}
+                                                className="flex items-center w-full"
+                                            >
+                                                <LogOut className="mr-2 h-4 w-4" />
+                                                Sign out
+                                            </button>
                                         </DropdownMenuItem>
                                     </DropdownMenuContent>
                                 </DropdownMenu>

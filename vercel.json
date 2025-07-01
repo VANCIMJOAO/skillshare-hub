@@ -1,17 +1,12 @@
 {
   "version": 2,
-  "framework": "nextjs",
-  "buildCommand": "npm run build",
-  "installCommand": "npm install",
-  "functions": {
-    "app/**/*": {
-      "maxDuration": 30
-    }
-  },
+  "buildCommand": "cd apps/web && npm run build",
+  "outputDirectory": "apps/web/.next",
+  "installCommand": "cd apps/web && npm install",
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "https://skillsharehub-production.up.railway.app/api/:path*"
+      "source": "/api/(.*)",
+      "destination": "https://skillsharehub-production.up.railway.app/api/$1"
     }
   ]
 }

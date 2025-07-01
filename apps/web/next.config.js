@@ -19,9 +19,17 @@ const nextConfig = {
         unoptimized: true,
     },
 
-    // Simple experimental config
+    // Force all pages to be client-side only
+    trailingSlash: true,
+    
+    // Simple experimental config (remove appDir for Next 14)
     experimental: {
-        appDir: true,
+        // appDir is default in Next 14
+    },
+    
+    // Disable static optimization
+    async rewrites() {
+        return [];
     },
 };
 
