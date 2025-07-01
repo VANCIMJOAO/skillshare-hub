@@ -1,149 +1,179 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
+import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-
-interface DemoUser {
-    id: string;
-    email: string;
-    name: string;
-    role: string;
-    loggedIn: boolean;
-    loginTime: string;
-}
+import { useEffect } from 'react';
+import Link from 'next/link';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { BookOpen, Calendar, Settings, User, LogOut } from 'lucide-react';
 
 export default function DashboardPage() {
-    const [user, setUser] = useState<DemoUser | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const { data: session, status } = useSession();
     const router = useRouter();
 
     useEffect(() => {
-        // Verifica se há usuário logado no localStorage (modo demo)
-        const userData = localStorage.getItem('demo-user');
-        if (userData) {
-            try {
-                const parsedUser = JSON.parse(userData);
-                if (parsedUser.loggedIn) {
-                    setUser(parsedUser);
-                } else {
-                    router.push('/auth/signin');
-                }
-            } catch (error) {
-                router.push('/auth/signin');
-            }
-        } else {
+        if (status === 'unauthenticated') {
             router.push('/auth/signin');
         }
-        setIsLoading(false);
-    }, [router]);
+    }, [status, router]);
+
+    if (status === 'loading') {
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+            </div>
+        );
+    }
+
+    if (!session) {
+        return null;
+    }
 
     const handleLogout = () => {
-        localStorage.removeItem('demo-user');
-        router.push('/');
+        signOut({ callbackUrl: '/' });
     };
-
-    if (isLoading) {
-        return (
-            <div className="min-h-screen flex items-center justify-center">
-                <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-                    <p>Carregando...</p>
-                </div>
-            </div>
-        );
-    }
-
-    if (!user) {
-        return (
-            <div className="min-h-screen flex items-center justify-center">
-                <div className="text-center">
-                    <h1 className="text-2xl font-bold mb-4">Acesso negado</h1>
-                    <p className="mb-4">Você precisa estar logado para acessar esta página.</p>
-                    <Link href="/auth/signin" className="text-blue-600 hover:underline">
-                        Fazer login
-                    </Link>
-                </div>
-            </div>
-        );
-    }
 
     return (
         <div className="min-h-screen bg-gray-50">
-            <nav className="bg-white shadow-sm border-b">
-                <div className="container mx-auto px-4 py-4">
-                    <div className="flex justify-between items-center">
-                        <h1 className="text-xl font-bold">SkillShare Hub</h1>
-                        <div className="flex items-center gap-4">
-                            <span>Olá, {user.name}!</span>
-                            <button 
+            <div className="bg-white shadow">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex justify-between items-center py-6">
+                        <div className="flex items-center">
+                            <h1 className="text-2xl font-bold text-gray-900">
+                                Dashboard
+                            </h1>
+                        </div>
+                        <div className="flex items-center space-x-4">
+                            <div className="flex items-center space-x-2">
+                                <User className="h-5 w-5 text-gray-500" />
+                                <span className="text-sm text-gray-700">
+                                    {session.user?.name || session.user?.email}
+                                </span>
+                                <Badge variant="secondary">
+                                    {session.user?.role || 'STUDENT'}
+                                </Badge>
+                            </div>
+                            <Button 
+                                variant="outline" 
+                                size="sm" 
                                 onClick={handleLogout}
-                                className="text-red-600 hover:underline"
+                                className="flex items-center space-x-1"
                             >
-                                Sair
-                            </button>
+                                <LogOut className="h-4 w-4" />
+                                <span>Sair</span>
+                            </Button>
                         </div>
                     </div>
                 </div>
-            </nav>
+            </div>
 
-            <main className="container mx-auto px-4 py-8">
-                <div className="grid gap-6">
-                    <div className="bg-white rounded-lg shadow-sm p-6">
-                        <h2 className="text-2xl font-bold mb-4">🎉 Login realizado com sucesso!</h2>
-                        <p className="text-gray-600 mb-4">
-                            Bem-vindo ao SkillShare Hub! Seu login foi realizado com sucesso usando o sistema de demonstração.
-                        </p>
-                        
-                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                            <h3 className="font-semibold text-blue-800 mb-2">🚀 Sistema de Demo Funcionando!</h3>
-                            <p className="text-blue-700">
-                                Esta demonstração prova que o sistema de autenticação está funcionalmente correto. 
-                                O login foi convertido para modo demo para contornar problemas de configuração do NextAuth.
-                            </p>
-                        </div>
-                        
-                        <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-                            <h3 className="font-semibold text-green-800 mb-2">Informações da sessão:</h3>
-                            <ul className="text-green-700 space-y-1">
-                                <li><strong>Email:</strong> {user.email}</li>
-                                <li><strong>Nome:</strong> {user.name}</li>
-                                <li><strong>Status:</strong> Logado ✅</li>
-                                <li><strong>Login em:</strong> {new Date(user.loginTime).toLocaleString()}</li>
-                            </ul>
-                        </div>
+            <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+                <div className="px-4 py-6 sm:px-0">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <Card>
+                            <CardHeader>
+                                <CardTitle className="flex items-center space-x-2">
+                                    <BookOpen className="h-5 w-5" />
+                                    <span>Meus Workshops</span>
+                                </CardTitle>
+                                <CardDescription>
+                                    Workshops que você está inscrito
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="text-center py-4">
+                                    <p className="text-sm text-gray-500 mb-4">
+                                        Você ainda não tem workshops inscritos
+                                    </p>
+                                    <Link href="/workshops">
+                                        <Button size="sm">
+                                            Explorar Workshops
+                                        </Button>
+                                    </Link>
+                                </div>
+                            </CardContent>
+                        </Card>
 
-                        <div className="grid md:grid-cols-2 gap-4">
-                            <Link 
-                                href="/" 
-                                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-center"
-                            >
-                                Voltar ao início
-                            </Link>
-                            <Link 
-                                href="/workshops" 
-                                className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 text-center"
-                            >
-                                Ver workshops
-                            </Link>
-                        </div>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle className="flex items-center space-x-2">
+                                    <Calendar className="h-5 w-5" />
+                                    <span>Próximos Eventos</span>
+                                </CardTitle>
+                                <CardDescription>
+                                    Seus próximos workshops agendados
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="text-center py-4">
+                                    <p className="text-sm text-gray-500">
+                                        Nenhum evento agendado
+                                    </p>
+                                </div>
+                            </CardContent>
+                        </Card>
+
+                        <Card>
+                            <CardHeader>
+                                <CardTitle className="flex items-center space-x-2">
+                                    <Settings className="h-5 w-5" />
+                                    <span>Configurações</span>
+                                </CardTitle>
+                                <CardDescription>
+                                    Gerencie sua conta e preferências
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="space-y-2">
+                                    <Link href="/profile">
+                                        <Button variant="outline" size="sm" className="w-full">
+                                            Editar Perfil
+                                        </Button>
+                                    </Link>
+                                    <Link href="/profile/notifications">
+                                        <Button variant="outline" size="sm" className="w-full">
+                                            Notificações
+                                        </Button>
+                                    </Link>
+                                </div>
+                            </CardContent>
+                        </Card>
                     </div>
 
-                    <div className="bg-white rounded-lg shadow-sm p-6">
-                        <h3 className="text-lg font-semibold mb-4">🚀 Portfolio Demo</h3>
-                        <p className="text-gray-600 mb-4">
-                            Este é um projeto de demonstração do SkillShare Hub, mostrando:
-                        </p>
-                        <ul className="list-disc list-inside text-gray-600 space-y-2">
-                            <li>Autenticação funcional com NextAuth</li>
-                            <li>Interface moderna com React e Next.js</li>
-                            <li>Backend APIs em NestJS</li>
-                            <li>Deploy em produção (Vercel + Railway)</li>
-                            <li>Arquitetura full-stack escalável</li>
-                        </ul>
+                    <div className="mt-8">
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Bem-vindo ao SkillHub!</CardTitle>
+                                <CardDescription>
+                                    Sua plataforma de aprendizado está funcionando perfeitamente
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                                    <div className="text-center p-4 bg-blue-50 rounded-lg">
+                                        <div className="font-semibold text-blue-900">Sistema</div>
+                                        <div className="text-sm text-blue-700">✅ Funcionando</div>
+                                    </div>
+                                    <div className="text-center p-4 bg-green-50 rounded-lg">
+                                        <div className="font-semibold text-green-900">Autenticação</div>
+                                        <div className="text-sm text-green-700">✅ Ativa</div>
+                                    </div>
+                                    <div className="text-center p-4 bg-purple-50 rounded-lg">
+                                        <div className="font-semibold text-purple-900">API</div>
+                                        <div className="text-sm text-purple-700">✅ Conectada</div>
+                                    </div>
+                                    <div className="text-center p-4 bg-orange-50 rounded-lg">
+                                        <div className="font-semibold text-orange-900">CORS</div>
+                                        <div className="text-sm text-orange-700">✅ Configurado</div>
+                                    </div>
+                                </div>
+                            </CardContent>
+                        </Card>
                     </div>
                 </div>
-            </main>
+            </div>
         </div>
     );
 }

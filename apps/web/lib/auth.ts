@@ -2,6 +2,8 @@
 import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+
 export const authOptions: NextAuthOptions = {
     providers: [
         CredentialsProvider({
@@ -16,17 +18,37 @@ export const authOptions: NextAuthOptions = {
                         return null;
                     }
 
-                    // Para demo, aceita qualquer login válido  
-                    if (credentials.email && credentials.password) {
-                        return {
-                            id: '1',
+                    // Fazer login na API real
+                    const response = await fetch(`${API_URL}/auth/login`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
                             email: credentials.email,
-                            name: credentials.email.split('@')[0],
-                            role: 'user',
-                            accessToken: 'demo-token',
-                            refreshToken: 'demo-refresh-token'
+                            password: credentials.password,
+                        }),
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json().catch(() => ({}));
+                        console.error('Login failed:', errorData);
+                        return null;
+                    }
+
+                    const result = await response.json();
+                    
+                    if (result.data && result.data.user && result.data.accessToken) {
+                        return {
+                            id: result.data.user.id,
+                            email: result.data.user.email,
+                            name: result.data.user.name,
+                            role: result.data.user.role,
+                            accessToken: result.data.accessToken,
+                            refreshToken: result.data.refreshToken,
                         };
                     }
+                    
                     return null;
                 } catch (error) {
                     console.error('Auth error:', error);
@@ -41,7 +63,7 @@ export const authOptions: NextAuthOptions = {
                 if (user) {
                     token.email = user.email;
                     token.name = user.name;
-                    token.role = (user as any).role || 'user';
+                    token.role = (user as any).role || 'STUDENT';
                     token.accessToken = (user as any).accessToken;
                     token.refreshToken = (user as any).refreshToken;
                 }
@@ -54,10 +76,10 @@ export const authOptions: NextAuthOptions = {
         async session({ session, token }) {
             try {
                 if (token && session.user) {
-                    session.user.id = token.sub || '1';
+                    session.user.id = token.sub || '';
                     session.user.email = token.email || '';
                     session.user.name = token.name || '';
-                    session.user.role = (token.role as string) || 'user';
+                    session.user.role = (token.role as string) || 'STUDENT';
                     (session as any).accessToken = token.accessToken;
                     (session as any).refreshToken = token.refreshToken;
                 }
@@ -83,5 +105,5 @@ export const authOptions: NextAuthOptions = {
         strategy: 'jwt',
         maxAge: 30 * 24 * 60 * 60, // 30 days
     },
-    secret: process.env.NEXTAUTH_SECRET || 'skillshare-hub-demo-secret',
+    secret: process.env.NEXTAUTH_SECRET,
 };

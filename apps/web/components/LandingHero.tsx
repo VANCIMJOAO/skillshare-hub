@@ -13,7 +13,8 @@ import {
     Star,
     Play,
     CheckCircle,
-    Sparkles
+    Sparkles,
+    User
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -61,7 +62,6 @@ const testimonials = [
 ];
 
 export default function LandingHero() {
-    const [playingDemo, setPlayingDemo] = useState(false);
 
     return (
         <>
@@ -90,28 +90,31 @@ export default function LandingHero() {
                             </div>
 
                             <div className="flex flex-col sm:flex-row gap-4">
-                                <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600">
-                                    Explorar Workshops
-                                    <ArrowRight className="ml-2 h-4 w-4" />
-                                </Button>
-                                <Link href="/auth/signin-demo">
+                                <Link href="/workshops">
+                                    <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600">
+                                        Explorar Workshops
+                                        <ArrowRight className="ml-2 h-4 w-4" />
+                                    </Button>
+                                </Link>
+                                <Link href="/auth/signin">
                                     <Button
                                         variant="outline"
                                         size="lg"
                                         className="w-full sm:w-auto border-2 border-green-500 text-green-600 hover:bg-green-50"
                                     >
                                         <CheckCircle className="mr-2 h-4 w-4" />
-                                        Login Demo
+                                        Fazer Login
                                     </Button>
                                 </Link>
-                                <Button
-                                    variant="outline"
-                                    size="lg"
-                                    onClick={() => setPlayingDemo(true)}
-                                >
-                                    <Play className="mr-2 h-4 w-4" />
-                                    Ver Demo
-                                </Button>
+                                <Link href="/auth/register">
+                                    <Button
+                                        variant="outline"
+                                        size="lg"
+                                    >
+                                        <User className="mr-2 h-4 w-4" />
+                                        Criar Conta
+                                    </Button>
+                                </Link>
                             </div>
 
                             {/* Stats */}
@@ -131,13 +134,11 @@ export default function LandingHero() {
                         <div className="relative">
                             <div className="relative bg-white rounded-2xl shadow-2xl p-8">
                                 <div className="aspect-video bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
-                                    <Button
-                                        size="lg"
-                                        className="bg-white/20 backdrop-blur-sm hover:bg-white/30"
-                                        onClick={() => setPlayingDemo(true)}
-                                    >
-                                        <Play className="h-8 w-8" />
-                                    </Button>
+                                    <div className="text-center text-white">
+                                        <BookOpen className="h-16 w-16 mx-auto mb-4" />
+                                        <h3 className="text-xl font-bold mb-2">SkillHub</h3>
+                                        <p className="text-blue-100">Plataforma de Aprendizado</p>
+                                    </div>
                                 </div>
                                 <div className="mt-4 space-y-2">
                                     <div className="flex items-center gap-2">

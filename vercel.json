@@ -1,17 +1,8 @@
 {
-  "name": "skillshare-hub",
   "version": 2,
   "framework": "nextjs",
-  "buildCommand": "pnpm build",
-  "devCommand": "pnpm dev",
-  "installCommand": "pnpm install",
-  "outputDirectory": ".next",
-  "rootDirectory": "apps/web",
-  "env": {
-    "NEXT_PUBLIC_API_URL": "https://skillsharehub-production.up.railway.app",
-    "NEXTAUTH_SECRET": "skillshare-hub-nextauth-secret-2024",
-    "NEXTAUTH_URL": "https://skillsharehub-jvancim-gmailcoms-projects.vercel.app"
-  },
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
   "functions": {
     "app/**/*": {
       "maxDuration": 30

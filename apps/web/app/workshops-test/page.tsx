@@ -13,7 +13,7 @@ export default function SimpleWorkshopsTest() {
                 setLoading(true);
                 console.log('🔄 Fetching workshops from API...');
                 
-                const response = await fetch('http://localhost:3004/workshops');
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/workshops`);
                 
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status}: ${response.statusText}`);

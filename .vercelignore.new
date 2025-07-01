@@ -1,0 +1,82 @@
+# Ignore heavy files and directories
+node_modules/
+.git/
+.next/
+coverage/
+uploads/
+screenshots/
+docs/images/
+*.log
+*.lock
+pnpm-lock.yaml
+.vscode/
+.idea/
+*.md
+!README.md
+test_results.txt
+*.zip
+*.tar.gz
+*.sql
+*.bak
+*.backup
+apps/api/
+packages/
+.env.local
+.env.development
+.env.test
+
+# Ignore large cache files - Critical for size reduction
+**/.next/cache/
+**/cache/
+**/.cache/
+**/dist/
+**/build/
+**/.turbo/
+
+# Ignore dev dependencies and build artifacts
+**/node_modules/
+**/.git/
+
+# Ignore large media files
+**/*.mp4
+**/*.mov
+**/*.avi
+**/*.mkv
+**/*.gif
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.pdf
+**/*.svg
+!apps/web/public/favicon.ico
+!apps/web/public/logo.png
+
+# Ignore temporary files
+**/tmp/
+**/temp/
+**/.DS_Store
+**/Thumbs.db
+
+# Ignore archive files
+**/*.zip
+**/*.tar
+**/*.gz
+**/*.7z
+**/*.rar
+
+# Ignore binary files and problematic files
+zi2ApUJ3
+**/zi2*
+
+# Ignore test files
+**/test_results.txt
+**/__tests__/
+**/tests/
+**/*.test.*
+**/*.spec.*
+
+# Ignore documentation that's not needed in production
+**/docs/
+**/*.md
+!README.md
+!CHANGELOG.md
