@@ -17,14 +17,26 @@ export const authOptions: NextAuthOptions = {
                         return null;
                     }
 
-                    // Para demonstração, vamos aceitar qualquer usuário com senha válida
-                    if (credentials.password.length >= 6) {
+                    // Validate against backend API
+                    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email: credentials.email,
+                            password: credentials.password,
+                        }),
+                    });
+
+                    if (response.ok) {
+                        const user = await response.json();
                         console.log('Login successful for:', credentials.email);
                         return {
-                            id: '1',
-                            email: credentials.email,
-                            name: credentials.email.split('@')[0],
-                            role: 'STUDENT',
+                            id: user.id,
+                            email: user.email,
+                            name: user.name,
+                            role: user.role || 'STUDENT',
                         };
                     }
                     
@@ -73,7 +85,7 @@ export const authOptions: NextAuthOptions = {
         },
         async signIn({ user, account, profile }) {
             console.log('SignIn callback:', { user, account });
-            return true; // Sempre permitir sign in para demo
+            return user ? true : false; // Only allow valid users
         },
     },
     // Remover completamente configuração de páginas personalizadas
@@ -82,5 +94,5 @@ export const authOptions: NextAuthOptions = {
         maxAge: 30 * 24 * 60 * 60, // 30 days
     },
     secret: process.env.NEXTAUTH_SECRET || 'fallback-secret-for-development',
-    debug: true, // Ativar debug para ver logs
+    debug: process.env.NODE_ENV === 'development', // Debug only in development
 };

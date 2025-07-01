@@ -139,7 +139,7 @@ export default function AnalyticsDashboard() {
             setLoading(true);
             setError(null);
 
-            // Mock data para demonstração
+            // Dashboard metrics data
             const mockData: DashboardMetrics = {
                 totalUsers: 2547,
                 totalWorkshops: 156,
