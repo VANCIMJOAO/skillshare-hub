@@ -130,3 +130,10 @@ playwright/.cache/
 # Temporary files
 zi2ApUJ3
 .vercel
+
+# Turborepo cache
+.turbo/
+
+# Backup and history folders
+backup-reset/
+docs-history/
