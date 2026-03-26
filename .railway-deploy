@@ -1,5 +1,0 @@
-Timestamp: seg 30 jun 2025 01:21:30 UTC
-AppController Status: Configured in AppModule
-Routes: /, /ping
-Build: Force complete rebuild with npm ci
-Expected: API endpoints / and /ping should respond
